@@ -264,11 +264,14 @@ Plat5Game.prototype.createScreenElement = function(e, lvl, id)
 		var res = lvl.resources[spr.res];
 		ele = jQuery("<div id=\""+id+"\" style=\"background-image:url('"+res.strip+"');width:"+res.width+"px;height:"+res.height+"px;position: absolute;top:0;left:0;-webkit-transform: translate3d("+e.x+"px,"+e.y+"px,0px);\"></div>");
 		spr.element = ele;
+		
 		e.updateRange = jQuery.noop;
 		e.element = ele;
 		e.sprite = spr;
+		
 		lvl.eleIdx[e.name] = e;
 		lvl.sprIdx[e.name] = e;
+		
 		parent.append(ele);
 		theGame.startRange(e.name, e.startrange);
 		e.updateRange(new Date().getTime());
@@ -284,6 +287,7 @@ Plat5Game.prototype.createScreenElement = function(e, lvl, id)
 Plat5Game.prototype.setText = function(eleName, val)
 {
 	var ele = this.currentLevel.eleIdx[eleName].element;
+	
 	/* TODO: Verify that this is a text node? Possibly not.. I'm leaning towards
 	 * seat-of-pants optimisation, and to hell with telling anyone what went wrong.
 	 * If it explodes, I want you to cry whilst debugging it. */
@@ -295,7 +299,7 @@ Plat5Game.prototype.translate = function(eleName, x, y)
 {
 	var ele = this.currentLevel.eleIdx[eleName];
 	
-	//ele.translate3d(x, y, 0);
+	// ele.translate3d(x, y, 0);
 }
 
 function startLoop()
