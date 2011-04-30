@@ -8,18 +8,22 @@ function DemoGame()
 	log("Demo game constructed");
 }
 
-DemoGame.prototype.update = function(time)
+DemoGame.prototype.gameInit = function(game)
 {
-	theGame.setText("fpstxt", theGame.fps);
-	theGame.setPos("aplatform1", 100 +(time %50), 100 +(time %70));
+	this.game = game;
+	
+	log("Game init. Plat5 engine version "+game.engineInfo.version);
+	log("parsed game",game);
+	
+	game.loadLevel("first");
 }
 
-DemoGame.prototype.gameInit = function()
+DemoGame.prototype.update = function(time)
 {
-	log("Game init. Plat5 engine version "+theGame.engineInfo.version);
-	log("parsed game",theGame);
+	var g = this.game;
 	
-	theGame.loadLevel("first");
+	g.setText("fpstxt", g.fps);
+	g.setPos("aplatform1", 100 +(time %50), 100 +(time %70));
 }
 
 DemoGame.prototype.levelInit = function()
@@ -29,6 +33,8 @@ DemoGame.prototype.levelInit = function()
 
 DemoGame.prototype.resourceProgress = function(pc)
 {
+	/* TODO: Cheeky thought.. could we have a smaller game that acted as
+	 * a pre-loader? That'd be interesting... */
 	log("Load progress: "+pc+"%");
 }
 
@@ -40,6 +46,6 @@ DemoGame.prototype.screenReady = function()
 DemoGame.prototype.err = function(err)
 {
 	log("ERROR: "+err);
-	/* TODO: Destroy the game and do not permit it to comtinue. Perhaps create
-	 * an error div in its place. */
+	/* TODO: Destroy the game and do not permit it to continue. Perhaps create
+	 * an error div in its place with a big, red, flashing warning sign. */
 }

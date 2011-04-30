@@ -37,3 +37,20 @@ if ( !window.requestAnimationFrame ) {
 	} )();
 
 }
+
+
+/* Handy code to create context for callback functions by making use of closures */
+function context(context)
+{
+	var co =
+	{
+		callback: function (method)
+		{
+        	return function ()
+        	{
+        		method.apply(context, arguments);
+        	};
+		}
+	};
+	return co;
+}

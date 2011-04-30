@@ -9,13 +9,6 @@
 /* TODO: Make this check the version and alert if it's insufficient. */
 log("Setting up Plat5 library. Using jQuery v"+$.fn.jquery);
 
-/* TODO: Move these into the class and do away with the error that forbids 2 games on one
- * page. */
-var loopEpoch = undefined;
-var lastLoopTime = undefined;
-var lastFPSReport = 0;
-var theGame = undefined;
-
 
 /* TODO: Review error messages and turn relevant ones into exceptions. */
 
@@ -43,61 +36,61 @@ Plat5Game.prototype.loadLevel = function(lvl)
     log("Loading level: "+this.levels[lvl].data);
     
 	jQuery.ajax({
-		url: theGame.levels[lvl].data,
+		url: this.levels[lvl].data,
 		dataType: 'json',
 		
-		success: function(data) {
+		success: context(this).callback(function(data) {
 			log("raw level data",data);
 			
-			data.resources = jQuery.extend(true, {}, theGame.unarray(data.resources), theGame.globalResources);
-			data.spritedefs = jQuery.extend(true, {}, theGame.unarray(data.spritedefs), theGame.globalSprites);
-			data.screens = theGame.unarray(data.screens, ["elements"]);
+			data.resources = jQuery.extend(true, {}, this.unarray(data.resources), this.globalResources);
+			data.spritedefs = jQuery.extend(true, {}, this.unarray(data.spritedefs), this.globalSprites);
+			data.screens = this.unarray(data.screens, ["elements"]);
 			for (var scrName in data.screens)
 			{
 				var scr = data.screens[scrName];
-				scr.elements = scr.elements.concat(theGame.globalOverlayElements);
+				scr.elements = scr.elements.concat(this.globalOverlayElements);
 			}
 			
-			for (var i = 0; i < theGame.globalLayers.length; i++)
+			for (var i = 0; i < this.globalLayers.length; i++)
 			{
-				data.layers.push(jQuery.extend(true, {}, theGame.globalLayers[i]));
+				data.layers.push(jQuery.extend(true, {}, this.globalLayers[i]));
 			}
 			
-			data.layerIdx = theGame.unarray(data.layers);
+			data.layerIdx = this.unarray(data.layers);
 			
-			theGame.levels[lvl] = data;
+			this.levels[lvl] = data;
 			
-			theGame.currentLevel = theGame.levels[lvl];
+			this.currentLevel = this.levels[lvl];
 			
 			/* TODO: This replaces all the children with new layers. Perhaps we want to
 			 * have level transitions one day. Ponder this... */
-			theGame.scrn.children().remove();
+			this.scrn.children().remove();
 
-			var lyrs = theGame.levels[lvl].layers;
+			var lyrs = this.levels[lvl].layers;
 			for (var i = 0; i < lyrs.length; i++)
 			{
 				var lyr = lyrs[i];
 
-				var layerEle = jQuery("<div id=\"gamelayer"+(i+1)+"\" class=\"p5layer\" style=\"width:"+theGame.width+"px;height:"+theGame.height+"px\"></div>");
+				var layerEle = jQuery("<div id=\"gamelayer"+(i+1)+"\" class=\"p5layer\" style=\"width:"+this.width+"px;height:"+this.height+"px\"></div>");
 				lyr.element = layerEle;
-    			theGame.scrn.append(layerEle);
+    			this.scrn.append(layerEle);
     			
-				layerEle = jQuery("<div id=\"parallax"+(i+1)+"\" class=\"p5parallax\" style=\"width:"+theGame.width+"px;height:"+theGame.height+"px\"></div>");
+				layerEle = jQuery("<div id=\"parallax"+(i+1)+"\" class=\"p5parallax\" style=\"width:"+this.width+"px;height:"+this.height+"px\"></div>");
     			lyr.element.append(layerEle);
 				lyr.element = layerEle;
 			}
 			
-			log("Level data for level: "+lvl, theGame.levels[lvl]);
+			log("Level data for level: "+lvl, this.levels[lvl]);
 
-			theGame.gameCode.levelInit();
+			this.gameCode.levelInit();
 			
-			theGame.loadResources();
-		},
+			this.loadResources();
+		}),
 		
-		error: function()
+		error: context(this).callback(function()
 		{
-			theGame.gameCode.err("Failed to parse level JSON on level "+lvl);
-		}
+			this.gameCode.err("Failed to parse level JSON on level "+lvl);
+		})
 	});
 }
 
@@ -121,7 +114,7 @@ Plat5Game.prototype.loadResources = function()
 	this.totalFiles = Object.keys(res).length;
 	this.loadedFiles = 0;
 	
-	jQuery.each(res, function(name, r)
+	jQuery.each(res, context(this).callback(function(name, r)
 	{
 		var url = null;
 		var slice = null;
@@ -144,7 +137,7 @@ Plat5Game.prototype.loadResources = function()
 		 * to ensure they're cached? */
         var img = new Image();
         /* TODO: Is there a callback for when an image fails to load? */
-        img.onload = function()
+        img.onload = context(this).callback(function()
         {
 			if (slice==null)
 			{
@@ -173,20 +166,20 @@ Plat5Game.prototype.loadResources = function()
 				}
 			}
 			
-			var total = theGame.totalFiles;
-			var loadedFiles = ++theGame.loadedFiles;
+			var total = this.totalFiles;
+			var loadedFiles = ++this.loadedFiles;
 			/* Rounding paranoia ensures we always have a 100%... */
 			var pc = (total==loadedFiles)?100:Math.floor((100 * loadedFiles) / total);
 			
-			theGame.gameCode.resourceProgress(pc);
+			this.gameCode.resourceProgress(pc);
 			
 			if (total==loadedFiles)
 			{
-				theGame.gotoScreen(theGame.currentLevel.startScreen);
+				this.gotoScreen(this.currentLevel.startScreen);
 			}
-        }
+        });
         img.src = url;
-    });
+    }));
 }
 
 Plat5Game.prototype.gotoScreen = function(screenName)
@@ -209,7 +202,7 @@ Plat5Game.prototype.gotoScreen = function(screenName)
 
 Plat5Game.prototype.startRange = function(sprName, rangeName)
 {
-	var lvl = theGame.currentLevel;
+	var lvl = this.currentLevel;
 	var e = lvl.eleIdx[sprName];
 	e.currentRange = e.spriteDef.ranges[rangeName];
 	e.frameDuration = 1000 / e.currentRange.fps;
@@ -257,7 +250,7 @@ Plat5Game.prototype.createScreenElement = function(e, lvl, id)
 		lvl.sprIdx[e.name] = e;
 		
 		parent.append(ele);
-		theGame.startRange(e.name, e.startrange);
+		this.startRange(e.name, e.startrange);
 		e.updateRange(new Date().getTime());
 	}
 	else
@@ -287,11 +280,11 @@ Plat5Game.prototype.setPos = function(eleName, x, y)
 
 Plat5Game.prototype.startLoop = function()
 {
-	loopEpoch = new Date().getTime();
-	requestAnimationFrame(this.gameLoop, theGame.scrn);
+	this.loopEpoch = new Date().getTime();
+	requestAnimationFrame(context(this).callback(this.gameLoop), this.scrn);
 }
 
-/** Callback function, so no 'this' context. */
+/** Callback function, so reference via context() to enclose 'this' */
 Plat5Game.prototype.gameLoop = function(time)
 {
 	/* Since chrome fails to pass the time in its current build, we need to
@@ -302,25 +295,25 @@ Plat5Game.prototype.gameLoop = function(time)
 		time = new Date().getTime();
 	}
 	
-	if (lastLoopTime == undefined)
+	if (this.lastLoopTime == undefined)
 	{
 		/* This is the first frame. Don't do anything, just note the time and re-schedule... */
 		/* Bit hacky, but our laziness will go unnoticed over 1/60th second. */
-		lastLoopTime = time;
-		requestAnimationFrame(theGame.gameLoop, theGame.scrn);
+		this.lastLoopTime = time;
+		requestAnimationFrame(context(this).callback(this.gameLoop), this.scrn);
 		return;
 	}
 	
-	if (time - lastFPSReport > 500)
+	if (time - this.lastFPSReport > 500)
 	{
-		lastFPSReport = time;
-		theGame.fps = Math.floor(1000 / (time - lastLoopTime));
+		this.lastFPSReport = time;
+		this.fps = Math.floor(1000 / (time - this.lastLoopTime));
 	}
-	lastLoopTime = time;
+	this.lastLoopTime = time;
 	
-	theGame.gameCode.update(time);
+	this.gameCode.update(time);
 	
-	var lvl = theGame.currentLevel;
+	var lvl = this.currentLevel;
 	
 	jQuery.each(lvl.sprIdx, function(name, e)
 	{
@@ -330,7 +323,7 @@ Plat5Game.prototype.gameLoop = function(time)
 		}
 	});
 
-	requestAnimationFrame(theGame.gameLoop, theGame.scrn);
+	requestAnimationFrame(context(this).callback(this.gameLoop), this.scrn);
 }
 
 Plat5Game.prototype.updateRange_cycle = function(time)
@@ -406,8 +399,8 @@ Plat5Game.prototype.unarray = function(a,filter)
 Plat5Game.prototype.setParallaxPos = function(pc)
 {
 	/* Queue this on the next animation update */
-	requestAnimationFrame(function() {
-		var lyrs = theGame.currentLevel.layers;
+	requestAnimationFrame(context(this).callback(function() {
+		var lyrs = this.currentLevel.layers;
 		for (var i = 0; i < lyrs.length; i++)
 		{
 			var lyr = lyrs[i];
@@ -415,7 +408,7 @@ Plat5Game.prototype.setParallaxPos = function(pc)
 			{
 				/* TODO: Optimise. Maintain a list of parallax layers to avoid this test. */
 				/* TODO: Verify on load: Parallax width must be > game width */
-				var pos = -Math.floor(pc * (lyr.parallaxWidth - theGame.width));
+				var pos = -Math.floor(pc * (lyr.parallaxWidth - this.width));
 
 				/* TODO: Optimization. Multiple queued methods with requestAnimationFrame mean that
 				 * each callback is likely to trigger a layout before the page is repainted. This can
@@ -426,7 +419,7 @@ Plat5Game.prototype.setParallaxPos = function(pc)
 				lyr.element.css("left", pos+"px");
 			}
 		}
-	}, this.scrn);
+	}), this.scrn);
 }
 
 Plat5Game.prototype.run = function()
@@ -434,39 +427,41 @@ Plat5Game.prototype.run = function()
 	log("Loading game "+this.gameDataURL);
 	
 	jQuery.ajax({
-		url: theGame.gameDataURL,
+		url: this.gameDataURL,
 		dataType: 'json',
 		
-		success: function(data) {
+		success: context(this).callback(function(data) {
 			log("raw game data", data);
 			
-			theGame.author = data.author;
-			theGame.title = data.title;
-			theGame.version = data.version;
+			this.author = data.author;
+			this.title = data.title;
+			this.version = data.version;
 			
-			theGame.width = data.width;
-			theGame.height = data.height;
+			this.width = data.width;
+			this.height = data.height;
 			
-			theGame.globalResources = theGame.unarray(data.resources);
-			theGame.globalSprites = theGame.unarray(data.spritedefs);
-			theGame.globalLayers = data.overlays;
-			theGame.globalOverlayElements = data.overlayElements;
+			this.globalResources = this.unarray(data.resources);
+			this.globalSprites = this.unarray(data.spritedefs);
+			this.globalLayers = data.overlays;
+			this.globalOverlayElements = data.overlayElements;
 			
-			theGame.levels = theGame.unarray(data.levels);
+			this.levels = this.unarray(data.levels);
 			
 			/* TODO: Check for absense of anything and mark game as dead. */
 			
-			theGame.gameCode.gameInit();
+			this.gameCode.gameInit(this);
 			
-			theGame.scrn = jQuery("<div id=\"plat5screen\" class=\"p5screen\" style=\"width:"+data.width+"px;height:"+data.height+"px;background-color:"+data.bgcolor+"\"></div>");
-			theGame.gameContainer.append(theGame.scrn);
-		},
+			this.scrn = jQuery("<div id=\"plat5screen\" class=\"p5screen\" style=\"width:"+data.width+"px;height:"+data.height+"px;background-color:"+data.bgcolor+"\"></div>");
+			this.gameContainer.append(this.scrn);
+		}),
 		
-		error: function()
+		error: context(this).callback(function()
 		{
-			theGame.gameCode.err("Failed to parse game JSON");
-		}
+			this.gameCode.err("Failed to parse game JSON");
+		})
 	});
+	
+	return this;
 }
 
 
@@ -480,10 +475,7 @@ function Plat5Game(gameDataURL, gameContainer, gameCode)
 	this.gameDataURL = gameDataURL;
 	this.gameContainer = gameContainer;
 	
-	if (theGame != undefined)
-	{
-		gameCode.err("You can only have one game running on a page.");
-	}
-
-	theGame = this;
+	this.loopEpoch = undefined;
+	this.lastLoopTime = undefined;
+	this.lastFPSReport = 0;
 }
