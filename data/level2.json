@@ -12,12 +12,12 @@
 	
 	"__comment2": "Resources are used in screen definitions, and are pre-loaded",
 	"resources":[
-		{"name":"candh", "img": "img/candh.jpg"},
+		{"name":"candh", "img": "img/candh.png"},
 		{"name":"icecream", "img": "img/icecream.png"},
 		{"name":"bg", "img": "img/bg.png"}
 	],
 	
-	"sprites":[
+	"spritedefs":[
 	],
 	
 	"screens":[
@@ -25,9 +25,13 @@
 			"name":"screen1",
 			"elements":[
 				{"type":"img", "name":"background", "res":"bg", "x":0, "y":0, "layer":"bgLayer"},
-				{"type":"img", "name":"aplatform1", "res":"candh", "x":250, "y":300, "layer":"platformLayer", "platform":true},
-				{"type":"img", "name":"aplatform2", "res":"candh", "x":350, "y":300, "layer":"platformLayer", "platform":true},
-				{"type":"img", "name":"acharacter1", "res":"icecream", "x":460, "y":320, "layer":"characterLayer", "platform":false}
+				{"type":"img", "name":"aplatform1", "res":"candh", "x":250, "y":200, "layer":"platformLayer", "platform":true},
+				{"type":"img", "name":"aplatform2", "res":"candh", "x":350, "y":200, "layer":"platformLayer", "platform":true},
+				{"type":"img", "name":"acharacter1", "res":"icecream", "x":460, "y":230, "layer":"characterLayer", "platform":false},
+				{"type":"sprite", "name":"slowgirl1", "res":"girl", "x":100, "y":280, "layer":"characterLayer", "startrange":"walkslow"},
+				{"type":"sprite", "name":"standinggirl", "res":"girl", "x":230, "y":290, "layer":"platformLayer", "startrange":"stop"},
+				{"type":"sprite", "name":"slowgirl2", "res":"girl", "x":320, "y":320, "layer":"characterLayer", "startrange":"saunter"},
+				{"type":"sprite", "name":"fastgirl", "res":"girl", "x":390, "y":290, "layer":"characterLayer", "startrange":"walkfast"}
 			]
 		},
 		{

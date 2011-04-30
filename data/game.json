@@ -20,7 +20,7 @@
 	],
 
 	"__comment3": "Sprites common to all levels",
-	"sprites":[
+	"spritedefs":[
 		{"name":"girl", "type":"strip", "res":"girl", "ranges":[
 			{"name":"stop", "type":"static", "frame":3},
 			{"name":"walkslow", "type":"cycle", "from":0, "to":7, "fps":5},

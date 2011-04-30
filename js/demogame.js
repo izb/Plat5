@@ -8,10 +8,10 @@ function DemoGame()
 	log("Demo game constructed");
 }
 
-DemoGame.prototype.update = function()
+DemoGame.prototype.update = function(time)
 {
 	theGame.setText("fpstxt", theGame.fps);
-	theGame.translate("aplatform1", -50, 0);
+	theGame.setPos("aplatform1", 100 +(time %50), 100 +(time %70));
 }
 
 DemoGame.prototype.gameInit = function()

@@ -9,6 +9,8 @@
 /* TODO: Make this check the version and alert if it's insufficient. */
 log("Setting up Plat5 library. Using jQuery v"+$.fn.jquery);
 
+/* TODO: Move these into the class and do away with the error that forbids 2 games on one
+ * page. */
 var loopEpoch = undefined;
 var lastLoopTime = undefined;
 var lastFPSReport = 0;
@@ -48,7 +50,7 @@ Plat5Game.prototype.loadLevel = function(lvl)
 			log("raw level data",data);
 			
 			data.resources = jQuery.extend(true, {}, theGame.unarray(data.resources), theGame.globalResources);
-			data.sprites = jQuery.extend(true, {}, theGame.unarray(data.sprites), theGame.globalSprites);
+			data.spritedefs = jQuery.extend(true, {}, theGame.unarray(data.spritedefs), theGame.globalSprites);
 			data.screens = theGame.unarray(data.screens, ["elements"]);
 			for (var scrName in data.screens)
 			{
@@ -154,9 +156,9 @@ Plat5Game.prototype.loadResources = function()
 				/* TODO: Check for exact divisions with a modulo */
 				r.width = img.width/slice.cols;
 				r.height = img.height/slice.rows;
-				for (var sname in lvl.sprites)
+				for (var sname in lvl.spritedefs)
 				{
-					var sprite = lvl.sprites[sname];
+					var sprite = lvl.spritedefs[sname];
 					if (sprite.res == name)
 					{
 						sprite.frames = [];
@@ -187,23 +189,6 @@ Plat5Game.prototype.loadResources = function()
     });
 }
 
-function resProgress(evt, im)
-{
-	log("event",evt, im);
-	var total = theGame.totalFiles;
-	var loadedFiles = ++theGame.loadedFiles;
-	/* Rounding paranoia ensures we always have a 100%... */
-	var pc = (total==loadedFiles)?100:Math.floor((100 * loadedFiles) / total);
-	
-	theGame.gameCode.resourceProgress(pc);
-	
-	if (total==loadedFiles)
-	{
-		theGame.gotoScreen(theGame.currentLevel.startScreen);
-	}
-}
-
-
 Plat5Game.prototype.gotoScreen = function(screenName)
 {
 	var lvl = this.currentLevel;
@@ -218,7 +203,7 @@ Plat5Game.prototype.gotoScreen = function(screenName)
 		this.createScreenElement(e, lvl, "sprite"+(i+1));
 	}
 
-	startLoop();
+	this.startLoop();
 	this.gameCode.screenReady();
 }
 
@@ -226,7 +211,7 @@ Plat5Game.prototype.startRange = function(sprName, rangeName)
 {
 	var lvl = theGame.currentLevel;
 	var e = lvl.eleIdx[sprName];
-	e.currentRange = e.sprite.ranges[rangeName];
+	e.currentRange = e.spriteDef.ranges[rangeName];
 	e.frameDuration = 1000 / e.currentRange.fps;
 	e.updateRange = this["updateRange_"+e.currentRange.type];
 	e.rangeEpoch = new Date().getTime();
@@ -260,14 +245,13 @@ Plat5Game.prototype.createScreenElement = function(e, lvl, id)
 	}
 	else if (e.type == "sprite")
 	{
-		var spr = lvl.sprites[e.res];
-		var res = lvl.resources[spr.res];
+		var sprDef = lvl.spritedefs[e.res];
+		var res = lvl.resources[sprDef.res];
 		ele = jQuery("<div id=\""+id+"\" style=\"background-image:url('"+res.strip+"');width:"+res.width+"px;height:"+res.height+"px;position: absolute;top:0;left:0;-webkit-transform: translate3d("+e.x+"px,"+e.y+"px,0px);\"></div>");
-		spr.element = ele;
 		
 		e.updateRange = jQuery.noop;
 		e.element = ele;
-		e.sprite = spr;
+		e.spriteDef = sprDef;
 		
 		lvl.eleIdx[e.name] = e;
 		lvl.sprIdx[e.name] = e;
@@ -295,23 +279,24 @@ Plat5Game.prototype.setText = function(eleName, val)
 	ele.text(val);
 }
 
-Plat5Game.prototype.translate = function(eleName, x, y)
+Plat5Game.prototype.setPos = function(eleName, x, y)
 {
 	var ele = this.currentLevel.eleIdx[eleName];
-	
-	// ele.translate3d(x, y, 0);
+	ele.element.css("-webkit-transform", "translate3d("+x+"px,"+y+"px,0)");
 }
 
-function startLoop()
+Plat5Game.prototype.startLoop = function()
 {
 	loopEpoch = new Date().getTime();
-	requestAnimationFrame(gameLoop, theGame.scrn);
+	requestAnimationFrame(this.gameLoop, theGame.scrn);
 }
 
-function gameLoop(time) /* TODO: Move these inside the class. */
+/** Callback function, so no 'this' context. */
+Plat5Game.prototype.gameLoop = function(time)
 {
 	/* Since chrome fails to pass the time in its current build, we need to
 	 * do some upsettingly unnecessary faffing to work out the loop time. */
+	
 	if (time == undefined)
 	{
 		time = new Date().getTime();
@@ -320,9 +305,9 @@ function gameLoop(time) /* TODO: Move these inside the class. */
 	if (lastLoopTime == undefined)
 	{
 		/* This is the first frame. Don't do anything, just note the time and re-schedule... */
-		lastLoopTime = time;
-		requestAnimationFrame(gameLoop, theGame.scrn);
 		/* Bit hacky, but our laziness will go unnoticed over 1/60th second. */
+		lastLoopTime = time;
+		requestAnimationFrame(theGame.gameLoop, theGame.scrn);
 		return;
 	}
 	
@@ -333,7 +318,7 @@ function gameLoop(time) /* TODO: Move these inside the class. */
 	}
 	lastLoopTime = time;
 	
-	theGame.gameCode.update();
+	theGame.gameCode.update(time);
 	
 	var lvl = theGame.currentLevel;
 	
@@ -345,7 +330,7 @@ function gameLoop(time) /* TODO: Move these inside the class. */
 		}
 	});
 
-	requestAnimationFrame(gameLoop, theGame.scrn);
+	requestAnimationFrame(theGame.gameLoop, theGame.scrn);
 }
 
 Plat5Game.prototype.updateRange_cycle = function(time)
@@ -366,8 +351,8 @@ Plat5Game.prototype.updateRange_cycle = function(time)
 		return;
 	}
 	this.currentFrame = fIdx;
-	var fr = this.sprite.frames[fIdx];
-	//log("frame", dt, fIdx, fr, this, time, (r.to - r.from + 1), (1%8));
+	var fr = this.spriteDef.frames[fIdx];
+
 	this.element.css({backgroundPosition: fr.xshift+"px "+fr.yshift+"px"});
 }
 
@@ -376,7 +361,7 @@ Plat5Game.prototype.updateRange_static = function(time)
 	/* TODO: 'this' is a sprite element, but the class is Plat5Game. Oh JS, you demented
 	 * buffoon. Untwist this code. */
 	this.currentFrame = this.currentRange.frame;
-	var fr = this.sprite.frames[this.currentFrame];
+	var fr = this.spriteDef.frames[this.currentFrame];
 	this.element.css({backgroundPosition: fr.xshift+"px "+fr.yshift+"px"});
 	this.updateRange = jQuery.noop;
 }
@@ -463,7 +448,7 @@ Plat5Game.prototype.run = function()
 			theGame.height = data.height;
 			
 			theGame.globalResources = theGame.unarray(data.resources);
-			theGame.globalSprites = theGame.unarray(data.sprites);
+			theGame.globalSprites = theGame.unarray(data.spritedefs);
 			theGame.globalLayers = data.overlays;
 			theGame.globalOverlayElements = data.overlayElements;
 			
