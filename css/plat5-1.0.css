@@ -1,0 +1,17 @@
+.p5screen {
+	position:relative;
+	display:inline-block;
+}
+
+.p5image, .p5parallax, .p5text {
+	position: absolute;
+	top:0;
+	left:0;
+}
+
+.p5layer {
+	position:absolute;
+	top:0;
+	left:0;
+	overflow:hidden;
+}

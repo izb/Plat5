@@ -1,0 +1,25 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+  Creator: Ian Beveridge
+  Site: http://www.yeahbutisitart.com/
+  Twitter: @izb
+  Location: Glasgow, Scotland
+
+/* THANKS */
+  Web dude: Paul Irish
+  Twitter: @paul_irish
+  For: HTML5 boilerplate and JS awesomeness
+
+/* SITE */
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery
+  Software: Aptana3, WinSCP, Chrome 10, HTML5 boilerplate. Things like that.. y'know.
+  
+
+
+
+           *
+  K U P I O
