@@ -167,7 +167,7 @@ h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 /**
  * Primary styles
  *
- * Author: 
+ * Author: Ian Beveridge
  */
 
 
@@ -183,7 +183,7 @@ body {
 	background-color: black;
 }
 
-.shim {
+.vspacer {
 	height:30px;
 }
 
