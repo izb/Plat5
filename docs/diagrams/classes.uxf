@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="11.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>870</x>
+      <y>130</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>P5Game
+--
+-fps: Integer
+--
+#loadLevel(name: String): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>210</x>
+      <y>110</y>
+      <w>230</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>UserGame
+--
+--
+#gameInit(): void
+--
+Responsibilities
+-- Player control
+-- Input processing
+-- Sprite movement
+-- Level/Screen advancement</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>410</x>
+      <y>130</y>
+      <w>480</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>gameCode
+lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;50;460;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>590</x>
+      <y>300</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>P5ScreenElement
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>790</x>
+      <y>200</y>
+      <w>156</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>eleIdx
+lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;160;110;160;110;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>270</x>
+      <y>220</y>
+      <w>340</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>properties
+lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>320;140;60;140;60;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>770</x>
+      <y>480</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>P5Sprite
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>770</x>
+      <y>370</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>970</x>
+      <y>200</y>
+      <w>116</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>sprIdx
+lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;330;70;330;70;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>410</x>
+      <y>480</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>P5Label
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>580</x>
+      <y>370</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>590</x>
+      <y>670</y>
+      <w>230</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>P5Layer
+--
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>790</x>
+      <y>200</y>
+      <w>320</w>
+      <h>550</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;530;300;530;300;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>190</x>
+      <y>220</y>
+      <w>420</w>
+      <h>530</h>
+    </coordinates>
+    <panel_attributes>properties
+lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>400;510;60;510;60;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>640</x>
+      <y>370</y>
+      <w>126</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>information
+about
+lt=&lt;.</panel_attributes>
+    <additional_attributes>70;30;70;300</additional_attributes>
+  </element>
+</diagram>
