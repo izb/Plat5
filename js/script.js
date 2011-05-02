@@ -7,5 +7,5 @@
 
 var demogame = (function()
 {
-	return new Plat5Game("data/game.json", jQuery("#main"), new DemoGame()).run();
+	return new P5Game("data/game.json", jQuery("#main"), new DemoGame()).run();
 })();

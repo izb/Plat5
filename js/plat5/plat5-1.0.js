@@ -18,8 +18,18 @@ log("Setting up Plat5 library. Using jQuery v"+$.fn.jquery);
  * It might be an idea to separate out the ones that are into a different
  * namespace, just to clear up the code. */
 
+/* TODO: For niceness, we should go through all the properties set on the
+ * game object and initialise them in the constructor. And also review this
+ * for other classes.
+ */
 
-Plat5Game.prototype.loadLevel = function(lvl)
+/*
+ * P5Game
+ * 
+ * This is the game class.
+ */
+
+P5Game.prototype.loadLevel = function(lvl)
 {
 	if (this.levels[lvl].hasOwnProperty("layers"))
 	{
@@ -94,7 +104,7 @@ Plat5Game.prototype.loadLevel = function(lvl)
 	});
 }
 
-Plat5Game.prototype.loadResources = function()
+P5Game.prototype.loadResources = function()
 {
 	var res = this.currentLevel.resources;
 
@@ -182,7 +192,7 @@ Plat5Game.prototype.loadResources = function()
     }));
 }
 
-Plat5Game.prototype.gotoScreen = function(screenName)
+P5Game.prototype.gotoScreen = function(screenName)
 {
 	var lvl = this.currentLevel;
 	var scr = lvl.screens[screenName];
@@ -200,7 +210,7 @@ Plat5Game.prototype.gotoScreen = function(screenName)
 	this.gameCode.screenReady();
 }
 
-Plat5Game.prototype.startRange = function(sprName, rangeName)
+P5Game.prototype.startRange = function(sprName, rangeName)
 {
 	var lvl = this.currentLevel;
 	var e = lvl.eleIdx[sprName];
@@ -210,7 +220,7 @@ Plat5Game.prototype.startRange = function(sprName, rangeName)
 	e.rangeEpoch = new Date().getTime();
 }
 
-Plat5Game.prototype.createScreenElement = function(e, lvl, id)
+P5Game.prototype.createScreenElement = function(e, lvl, id)
 {
 	var parent = lvl.layerIdx[e.layer].element;
 	var ele = undefined;
@@ -261,7 +271,7 @@ Plat5Game.prototype.createScreenElement = function(e, lvl, id)
 	}
 }
 
-Plat5Game.prototype.setText = function(eleName, val)
+P5Game.prototype.setText = function(eleName, val)
 {
 	var ele = this.currentLevel.eleIdx[eleName].element;
 	
@@ -272,20 +282,20 @@ Plat5Game.prototype.setText = function(eleName, val)
 	ele.text(val);
 }
 
-Plat5Game.prototype.setPos = function(eleName, x, y)
+P5Game.prototype.setPos = function(eleName, x, y)
 {
 	var ele = this.currentLevel.eleIdx[eleName];
 	ele.element.css("-webkit-transform", "translate3d("+x+"px,"+y+"px,0)");
 }
 
-Plat5Game.prototype.startLoop = function()
+P5Game.prototype.startLoop = function()
 {
 	this.loopEpoch = new Date().getTime();
 	requestAnimationFrame(context(this).callback(this.gameLoop), this.scrn);
 }
 
 /** Callback function, so reference via context() to enclose 'this' */
-Plat5Game.prototype.gameLoop = function(time)
+P5Game.prototype.gameLoop = function(time)
 {
 	/* Since chrome fails to pass the time in its current build, we need to
 	 * do some upsettingly unnecessary faffing to work out the loop time. */
@@ -326,7 +336,7 @@ Plat5Game.prototype.gameLoop = function(time)
 	requestAnimationFrame(context(this).callback(this.gameLoop), this.scrn);
 }
 
-Plat5Game.prototype.updateRange_cycle = function(time)
+P5Game.prototype.updateRange_cycle = function(time)
 {
 	var r = this.currentRange;
 	var dt = Math.floor((time - this.rangeEpoch) / this.frameDuration);
@@ -346,20 +356,18 @@ Plat5Game.prototype.updateRange_cycle = function(time)
 	this.currentFrame = fIdx;
 	var fr = this.spriteDef.frames[fIdx];
 
-	this.element.css({backgroundPosition: fr.xshift+"px "+fr.yshift+"px"});
+	this.element.css("background-position", fr.xshift+"px "+fr.yshift+"px");
 }
 
-Plat5Game.prototype.updateRange_static = function(time)
+P5Game.prototype.updateRange_static = function(time)
 {
-	/* TODO: 'this' is a sprite element, but the class is Plat5Game. Oh JS, you demented
-	 * buffoon. Untwist this code. */
 	this.currentFrame = this.currentRange.frame;
 	var fr = this.spriteDef.frames[this.currentFrame];
-	this.element.css({backgroundPosition: fr.xshift+"px "+fr.yshift+"px"});
+	this.element.css("background-position", fr.xshift+"px "+fr.yshift+"px");
 	this.updateRange = jQuery.noop;
 }
 
-Plat5Game.prototype.unarray = function(a,filter)
+P5Game.prototype.unarray = function(a,filter)
 {
 	if (filter == null)
 	{
@@ -396,7 +404,7 @@ Plat5Game.prototype.unarray = function(a,filter)
 	return o;
 }
 
-Plat5Game.prototype.setParallaxPos = function(pc)
+P5Game.prototype.setParallaxPos = function(pc)
 {
 	/* Queue this on the next animation update */
 	requestAnimationFrame(context(this).callback(function() {
@@ -422,7 +430,7 @@ Plat5Game.prototype.setParallaxPos = function(pc)
 	}), this.scrn);
 }
 
-Plat5Game.prototype.run = function()
+P5Game.prototype.run = function()
 {
 	log("Loading game "+this.gameDataURL);
 	
@@ -465,10 +473,10 @@ Plat5Game.prototype.run = function()
 }
 
 
-Plat5Game.prototype.engineInfo = {version:"v1.0"};
+P5Game.prototype.engineInfo = {version:"v1.0"};
 
 
-function Plat5Game(gameDataURL, gameContainer, gameCode)
+function P5Game(gameDataURL, gameContainer, gameCode)
 {
 	this.gameCode = gameCode;
 	
@@ -479,3 +487,65 @@ function Plat5Game(gameDataURL, gameContainer, gameCode)
 	this.lastLoopTime = undefined;
 	this.lastFPSReport = 0;
 }
+
+
+/*
+ * P5Visual
+ * 
+ * This is the parent class for all things on the screen, and also the
+ * class used for simple, static images.
+ */
+
+function P5Visual(game)
+{
+	this.theGame = game;
+}
+
+
+
+
+/*
+ * P5Sprite
+ * 
+ * This is the sprite class for visual elements with frames of animation.
+ */
+
+
+P5Sprite.prototype = new P5Visual();
+P5Sprite.prototype.constructor=P5Sprite;
+function P5Sprite(game)
+{
+	P5Visual.prototype.constructor.call(this, game);
+}
+
+
+
+
+/*
+ * P5Label
+ * 
+ * This is the class for a piece of text on-screen.
+ */
+
+
+P5Label.prototype = new P5Visual();
+P5Label.prototype.constructor=P5Label;
+function P5Label(game)
+{
+	P5Label.prototype.constructor.call(this, game);
+}
+
+
+/*
+ * P5Layer
+ * 
+ * This is the class for a screen layer containing visuals.
+ */
+
+
+function P5Layer(game)
+{
+	this.theGame = game;
+}
+
+
