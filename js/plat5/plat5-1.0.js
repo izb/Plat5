@@ -206,13 +206,22 @@ var P5Game = (function() { /* Begin class definition */
 	    }));
 	}
 	
+	P5Game.prototype.clearElementIndices = function()
+	{
+		for (var n in this.currentLevel.eleIdx)
+		{
+			delete this.gameCode[n];
+		}
+		this.currentLevel.eleIdx = {};
+		this.currentLevel.sprIdx = {};
+	}
+	
 	P5Game.prototype.gotoScreen = function(screenName)
 	{
 		var lvl = this.currentLevel;
 		var scr = lvl.screens[screenName];
 		
-		this.currentLevel.eleIdx = {};
-		this.currentLevel.sprIdx = {};
+		this.clearElementIndices();
 		
 		for (var i =0; i < scr.elements.length; i++)
 		{
@@ -228,52 +237,19 @@ var P5Game = (function() { /* Begin class definition */
 	{
 		var parent = lvl.layerIdx[e.layer].element;
 		var ele = undefined;
-			
-		if (lvl.eleIdx.hasOwnProperty(e.name))
-		{
-			this.gameCode.err("Element name collision: "+e.name);
-			return;
-		}
-	
+				
 		if (e.type == "img")
 		{
-			var res = lvl.resources[e.res];
-			ele = jQuery("<div id=\""+id+"\" class=\"p5image\" style=\"-webkit-transform: translate3d("+e.x+"px,"+e.y+"px,0px);\"><img src=\""+res.img+"\"/></div>");
-			
-			var visOb = new P5Visual(this);
-			
-			visOb.element = ele;
-			lvl.eleIdx[e.name] = visOb;
-			parent.append(ele);
+			new P5Visual(this, e.name, parent, id, lvl.resources[e.res], e.x, e.y);
 		}
 		else if (e.type == "txt")
 		{
-			ele = jQuery("<div id=\""+id+"\" class=\"p5text "+e.cssClass+"\" style=\"-webkit-transform: translate3d("+e.x+"px,"+e.y+"px,0px);\">"+e.value+"</div>");
-			
-			var labelOb = new P5Label(this);
-
-			labelOb.element = ele;
-			lvl.eleIdx[e.name] = labelOb;
-			parent.append(ele);
+			var labelOb = new P5Label(this, e.name, parent, id, e.x, e.y, e.cssClass, e.value);
 		}
 		else if (e.type == "sprite")
 		{
 			var sprDef = lvl.spritedefs[e.res];
-			var res = lvl.resources[sprDef.res];
-			ele = jQuery("<div id=\""+id+"\" style=\"background-image:url('"+res.strip+"');width:"+res.width+"px;height:"+res.height+"px;position: absolute;top:0;left:0;-webkit-transform: translate3d("+e.x+"px,"+e.y+"px,0px);\"></div>");
-			
-			var sprOb = new P5Sprite(this);
-			
-			sprOb.updateRange = jQuery.noop;
-			sprOb.element = ele;
-			sprOb.spriteDef = sprDef;
-			
-			lvl.eleIdx[e.name] = sprOb;
-			lvl.sprIdx[e.name] = sprOb;
-			
-			parent.append(ele);
-			sprOb.startRange(e.startrange);
-			sprOb.updateRange(new Date().getTime());
+			new P5Sprite(this, e.name, parent, id, lvl.resources[sprDef.res], e.x, e.y, sprDef, e.startRange);
 		}
 		else
 		{
@@ -448,6 +424,82 @@ var P5Game = (function() { /* Begin class definition */
 
 return P5Game; })(); /* End class definition */
 
+
+/*
+ * P5Webkit
+ * 
+ * This is the parent class for all visual elements which adds in a bunch of platform specific
+ * stuff on WebKit browsers.
+ */
+var P5Webkit = (function() { /* Begin class definition */
+
+	function P5Webkit()
+	{
+		this.element = undefined;
+	}
+	
+	P5Webkit.prototype.setPos = function(x, y)
+	{
+		this.element.css("-webkit-transform", "translate3d("+x+"px,"+y+"px,0)");
+	}
+
+return P5Webkit; })(); /* End class definition */
+
+
+/*
+ * P5Mozilla
+ * 
+ * This is the parent class for all visual elements which adds in a bunch of platform specific
+ * stuff on Mozilla browsers.
+ */
+var P5Mozilla = (function() { /* Begin class definition */
+
+	function P5Mozilla()
+	{
+		this.element = undefined;
+	}
+	
+	P5Mozilla.prototype.setPos = function(x, y)
+	{
+		this.element.css("-moz-transform", "translate("+x+"px,"+y+"px)");
+	}
+
+return P5Mozilla; })(); /* End class definition */
+
+
+/*
+ * P5IE
+ * 
+ * This is the parent class for all visual elements which adds in a bunch of platform specific
+ * stuff on IE browsers.
+ */
+var P5IE = (function() { /* Begin class definition */
+
+	function P5IE()
+	{
+		this.element = undefined;
+	}
+	
+	P5IE.prototype.setPos = function(x, y)
+	{
+		/* Ok, IE is ambitious right now. */
+		//this.element.css("-moz-transform", "translate("+x+"px,"+y+"px)");
+	}
+
+return P5IE; })(); /* End class definition */
+
+
+var P5PlatformCode = P5IE;
+if (jQuery.browser.webkit)
+{
+	P5PlatformCode = P5Webkit;
+}
+else if (jQuery.browser.mozilla)
+{
+	P5PlatformCode = P5Mozilla;
+}
+
+
 /*
  * P5Visual
  * 
@@ -460,16 +512,29 @@ var P5Visual = (function() { /* Begin class definition */
 	 * classes. Just pass in a parent DOM node and the class creates its own element and
 	 * inserts itself. A parent class could provide browser specifics via this mechanism. */
 
-	function P5Visual(game)
+	P5Visual.prototype = new P5PlatformCode();
+	P5Visual.prototype.constructor=P5Visual;
+	function P5Visual(game, name, parent, id, resDef, x, y)
 	{
+		var lvl = game.currentLevel;
+		var gc = game.gameCode;
+		
+		if (lvl.eleIdx.hasOwnProperty(name) || gc.hasOwnProperty(name))
+		{
+			gc.err("Element name collision (image): "+e.name);
+			return null;
+		}
+		
 		this.theGame = game;
-		this.element = undefined;
+		
+		this.element = jQuery("<div id=\""+id+"\" class=\"p5image\" style=\"-webkit-transform: translate3d("+x+"px,"+y+"px,0px);\"><img src=\""+resDef.img+"\"/></div>");
+		
+		lvl.eleIdx[name] = this;
+		gc[name] = this;
+
+		parent.append(this.element);
 	}
 	
-	P5Visual.prototype.setPos = function(x, y)
-	{
-		this.element.css("-webkit-transform", "translate3d("+x+"px,"+y+"px,0)");
-	}
 
 return P5Visual; })(); /* End class definition */
 
@@ -486,14 +551,36 @@ var P5Sprite = (function() { /* Begin class definition */
 	
 	P5Sprite.prototype = new P5Visual();
 	P5Sprite.prototype.constructor=P5Sprite;
-	function P5Sprite(game)
+	function P5Sprite(game, name, parent, id, resDef, x, y, spriteDef, startRange)
 	{
-		P5Visual.prototype.constructor.call(this, game);
-		this.currentRange = undefined;
-		this.frameDuration = undefined;
-		this.updateRange = undefined;
-		this.rangeEpoch = undefined;
-		this.spriteDef = undefined;
+		/*
+		 * TODO: It would be nice to call the parent constructor, like this:
+		 * P5Visual.prototype.constructor.call(this, game, name, parent, id, resDef, x, y);
+		 * but I can't figure out a way to do that and have different markup for element, and
+		 * keep all the functionality in one function. So replicated code it is for the timebeing.
+		 */
+		var lvl = game.currentLevel;
+		var gc = game.gameCode;
+		
+		if (lvl.eleIdx.hasOwnProperty(name) || gc.hasOwnProperty(name))
+		{
+			gc.err("Element name collision (sprite): "+name);
+			return null;
+		}
+		
+		this.theGame = game;
+		
+		this.element = jQuery("<div id=\""+id+"\" style=\"background-image:url('"+resDef.strip+"');width:"+resDef.width+"px;height:"+resDef.height+"px;position: absolute;top:0;left:0;-webkit-transform: translate3d("+x+"px,"+y+"px,0px);\"></div>");
+		
+		this.spriteDef = spriteDef;
+		
+		lvl.eleIdx[name] = this;
+		lvl.sprIdx[name] = this;
+		gc[name] = this;
+		
+		parent.append(this.element);
+		this.startRange(startRange);
+		this.updateRange(new Date().getTime());
 	}
 	
 	P5Sprite.prototype.startRange = function(rangeName)
@@ -532,7 +619,7 @@ var P5Sprite = (function() { /* Begin class definition */
 		this.currentFrame = this.currentRange.frame;
 		var fr = this.spriteDef.frames[this.currentFrame];
 		this.element.css("background-position", fr.xshift+"px "+fr.yshift+"px");
-		this.updateRange = jQuery.noop;
+		this.updateRange = jQuery.noop; /* Remove the update function to stop the sprite. */
 	}
 	
 return P5Sprite; })(); /* End class definition */
@@ -551,9 +638,24 @@ var P5Label = (function() { /* Begin class definition */
 	
 	P5Label.prototype = new P5Visual();
 	P5Label.prototype.constructor=P5Label;
-	function P5Label(game)
+	function P5Label(game, name, parent, id, x, y, cssClass, text)
 	{
-		P5Visual.prototype.constructor.call(this, game);
+		var lvl = game.currentLevel;
+		var gc = game.gameCode;
+
+		if (lvl.eleIdx.hasOwnProperty(name) || gc.hasOwnProperty(name))
+		{
+			gc.err("Element name collision (label): "+name);
+			return null;
+		}
+		
+		this.theGame = game;
+		
+		this.element = jQuery("<div id=\""+id+"\" class=\"p5text "+cssClass+"\" style=\"-webkit-transform: translate3d("+x+"px,"+y+"px,0px);\">"+text+"</div>");
+
+		lvl.eleIdx[name] = this;
+		gc[name] = this;
+		parent.append(this.element);
 	}
 
 	P5Label.prototype.setText = function(val)
