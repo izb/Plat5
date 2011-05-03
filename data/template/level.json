@@ -1,0 +1,22 @@
+{
+	"name": "Level 1 title",
+
+	"__comment1": "Layers are referenced in screen definitions. Put them here.",
+	"layers":[
+	],
+	
+	"__comment2": "Resources are used in screen definitions, and are pre-loaded. Put them here.",
+	"resources":[
+	],
+	
+	"__comment3": "Sprites are on-screen animated objects. Put them here.",
+	"spritedefs":[
+	],
+	
+	"__comment4": "Your level can be split into 'screens'. Lay out the screens by defining them here.",
+	"screens":[
+	],
+	
+	"__comment5": "Name the screen that comes first in this level.",
+	"startScreen":"screen_name"
+}

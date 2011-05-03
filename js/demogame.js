@@ -22,7 +22,7 @@ DemoGame.prototype.update = function(time)
 {
 	var g = this.game;
 	
-	g.setText("fpstxt", g.fps);
+	g.currentLevel.eleIdx["fpstxt"].setText(g.fps);
 	g.setPos("aplatform1", 100 +(time %50), 100 +(time %70));
 }
 
