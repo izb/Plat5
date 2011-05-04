@@ -249,12 +249,11 @@ var P5Game = (function() { /* Begin class definition */
 		else if (e.type == "sprite")
 		{
 			var sprDef = lvl.spritedefs[e.res];
-			new P5Sprite(this, e.name, parent, id, lvl.resources[sprDef.res], e.x, e.y, sprDef, e.startRange);
+			new P5Sprite(this, e.name, parent, id, lvl.resources[sprDef.res], e.x, e.y, sprDef, e.startrange);
 		}
 		else
 		{
 			this.gameCode.err("Not implemented: screen elements of type '"+e.type+"'");
-			log("element", e);
 			return;
 		}
 	}
@@ -516,6 +515,12 @@ var P5Visual = (function() { /* Begin class definition */
 	P5Visual.prototype.constructor=P5Visual;
 	function P5Visual(game, name, parent, id, resDef, x, y)
 	{
+		if (game == undefined)
+		{
+			/* For the sake of parameterless prototype inheritance */
+			return { theGame: undefined, element: undefined };
+		}
+		
 		var lvl = game.currentLevel;
 		var gc = game.gameCode;
 		
