@@ -6,8 +6,7 @@
 * Version: 1.0
 */
 
-/* TODO: Make this check the version and alert if it's insufficient. */
-log("Setting up Plat5 library. Using jQuery v" + $.fn.jquery);
+/* TODO: Check jQuery version ($.fn.jquery) and alert if it's insufficient. */
 
 
 /* TODO: Review error messages and turn relevant ones into exceptions. */
@@ -40,7 +39,9 @@ var P5Game = (function() { /* Begin class definition */
 		
 		this.loopEpoch = undefined;
 		this.lastLoopTime = undefined;
-		this.lastFPSReport = 0;
+		
+		this.fpsWindow = [];
+		this.fpsTotalWindow = 0;
 	}
 	
 	P5Game.prototype.loadLevel = function(lvl)
@@ -57,14 +58,11 @@ var P5Game = (function() { /* Begin class definition */
 		 * game.totalFiles may not exist on the object yet. Perhaps add dummy values
 		 * on creation? */
 		
-	    log("Loading level: "+this.levels[lvl].data);
-	    
 		jQuery.ajax({
 			url: this.levels[lvl].data,
 			dataType: 'json',
 			
 			success: context(this).callback(function(data) {
-				log("raw level data",data);
 				
 				data.resources = jQuery.extend(true, {}, this.unarray(data.resources), this.globalResources);
 				data.spritedefs = jQuery.extend(true, {}, this.unarray(data.spritedefs), this.globalSprites);
@@ -103,9 +101,7 @@ var P5Game = (function() { /* Begin class definition */
 	    			lyr.element.append(layerEle);
 					lyr.element = layerEle;
 				}
-				
-				log("Level data for level: "+lvl, this.levels[lvl]);
-	
+					
 				this.gameCode.levelInit();
 				
 				this.preloadResources();
@@ -244,12 +240,12 @@ var P5Game = (function() { /* Begin class definition */
 		}
 		else if (e.type == "txt")
 		{
-			var labelOb = new P5Label(this, e.name, parent, id, e.x, e.y, e.cssClass, e.value);
+			new P5Label(this, e.name, parent, id, e.x, e.y, e.cssClass, e.value);
 		}
 		else if (e.type == "sprite")
 		{
 			var sprDef = lvl.spritedefs[e.res];
-			new P5Sprite(this, e.name, parent, id, lvl.resources[sprDef.res], e.x, e.y, sprDef, e.startrange);
+			var s = new P5Sprite(this, e.name, parent, id, lvl.resources[sprDef.res], e.x, e.y, sprDef, e.startrange);
 		}
 		else
 		{
@@ -278,18 +274,18 @@ var P5Game = (function() { /* Begin class definition */
 		
 		if (this.lastLoopTime == undefined)
 		{
-			/* This is the first frame. Don't do anything, just note the time and re-schedule... */
-			/* Bit hacky, but our laziness will go unnoticed over 1/60th second. */
 			this.lastLoopTime = time;
-			requestAnimationFrame(context(this).callback(this.gameLoop), this.scrn);
-			return;
 		}
 		
-		if (time - this.lastFPSReport > 500)
+		var dt = (time - this.lastLoopTime);
+		this.fpsWindow.push(dt);
+		this.fpsTotalWindow += dt;
+		if (this.fpsWindow.length > 5)
 		{
-			this.lastFPSReport = time;
-			this.fps = Math.floor(1000 / (time - this.lastLoopTime));
+			this.fpsTotalWindow -= this.fpsWindow.shift();
 		}
+
+		this.fps = Math.floor(1000 / (this.fpsTotalWindow / this.fpsWindow.length));
 		this.lastLoopTime = time;
 		
 		this.gameCode.update(time);
@@ -322,7 +318,6 @@ var P5Game = (function() { /* Begin class definition */
 			
 			if (!d.hasOwnProperty("name"))
 			{
-				log("ERR", a);
 				this.gameCode.err("JSON array must contain named objects.");
 				return null;
 			}
@@ -379,15 +374,11 @@ var P5Game = (function() { /* Begin class definition */
 	
 	P5Game.prototype.run = function()
 	{
-		log("Loading game "+this.gameDataURL);
-		
 		jQuery.ajax({
 			url: this.gameDataURL,
 			dataType: 'json',
 			
 			success: context(this).callback(function(data) {
-				log("raw game data", data);
-				
 				this.author = data.author;
 				this.title = data.title;
 				this.version = data.version;
@@ -434,8 +425,9 @@ var P5Webkit = (function() { /* Begin class definition */
 
 	function P5Webkit()
 	{
-		this.element = undefined;
 	}
+	
+	P5Webkit.prototype.element = undefined;
 	
 	P5Webkit.prototype.setPos = function(x, y)
 	{
@@ -455,8 +447,9 @@ var P5Mozilla = (function() { /* Begin class definition */
 
 	function P5Mozilla()
 	{
-		this.element = undefined;
 	}
+	
+	P5Mozilla.prototype.element = undefined;
 	
 	P5Mozilla.prototype.setPos = function(x, y)
 	{
@@ -476,8 +469,9 @@ var P5IE = (function() { /* Begin class definition */
 
 	function P5IE()
 	{
-		this.element = undefined;
 	}
+	
+	P5IE.prototype.element = undefined;
 	
 	P5IE.prototype.setPos = function(x, y)
 	{
@@ -518,7 +512,7 @@ var P5Visual = (function() { /* Begin class definition */
 		if (game == undefined)
 		{
 			/* For the sake of parameterless prototype inheritance */
-			return { theGame: undefined, element: undefined };
+			return this;
 		}
 		
 		var lvl = game.currentLevel;
@@ -532,7 +526,8 @@ var P5Visual = (function() { /* Begin class definition */
 		
 		this.theGame = game;
 		
-		this.element = jQuery("<div id=\""+id+"\" class=\"p5image\" style=\"-webkit-transform: translate3d("+x+"px,"+y+"px,0px);\"><img src=\""+resDef.img+"\"/></div>");
+		this.element = jQuery("<div id=\""+id+"\" class=\"p5image\"><img src=\""+resDef.img+"\"/></div>");
+		this.setPos(x,y);
 		
 		lvl.eleIdx[name] = this;
 		gc[name] = this;
@@ -564,6 +559,7 @@ var P5Sprite = (function() { /* Begin class definition */
 		 * but I can't figure out a way to do that and have different markup for element, and
 		 * keep all the functionality in one function. So replicated code it is for the timebeing.
 		 */
+		
 		var lvl = game.currentLevel;
 		var gc = game.gameCode;
 		
@@ -575,8 +571,9 @@ var P5Sprite = (function() { /* Begin class definition */
 		
 		this.theGame = game;
 		
-		this.element = jQuery("<div id=\""+id+"\" style=\"background-image:url('"+resDef.strip+"');width:"+resDef.width+"px;height:"+resDef.height+"px;position: absolute;top:0;left:0;-webkit-transform: translate3d("+x+"px,"+y+"px,0px);\"></div>");
-		
+		this.element = jQuery("<div id=\""+id+"\" style=\"background-image:url('"+resDef.strip+"');width:"+resDef.width+"px;height:"+resDef.height+"px;position: absolute;top:0;left:0;\"></div>");
+		this.setPos(x,y);
+
 		this.spriteDef = spriteDef;
 		
 		lvl.eleIdx[name] = this;
@@ -601,6 +598,7 @@ var P5Sprite = (function() { /* Begin class definition */
 		var r = this.currentRange;
 		var dt = Math.floor((time - this.rangeEpoch) / this.frameDuration);
 		var fIdx;
+		
 		if (dt <= 0)
 		{
 			fIdx = 0;
@@ -609,10 +607,12 @@ var P5Sprite = (function() { /* Begin class definition */
 		{
 			fIdx = (dt % (r.to - r.from + 1)) + r.from;
 		}
+		
 		if (fIdx == this.currentFrame)
 		{
 			return;
 		}
+		
 		this.currentFrame = fIdx;
 		var fr = this.spriteDef.frames[fIdx];
 	
@@ -656,7 +656,8 @@ var P5Label = (function() { /* Begin class definition */
 		
 		this.theGame = game;
 		
-		this.element = jQuery("<div id=\""+id+"\" class=\"p5text "+cssClass+"\" style=\"-webkit-transform: translate3d("+x+"px,"+y+"px,0px);\">"+text+"</div>");
+		this.element = jQuery("<div id=\""+id+"\" class=\"p5text "+cssClass+"\">"+text+"</div>");
+		this.setPos(x,y);
 
 		lvl.eleIdx[name] = this;
 		gc[name] = this;

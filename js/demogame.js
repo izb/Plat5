@@ -7,15 +7,13 @@ var DemoGame = (function() { /* Begin class definition */
 
 	function DemoGame()
 	{
-		log("Demo game constructed");
 	}
 	
 	DemoGame.prototype.gameInit = function(game)
 	{
 		this.game = game;
 		
-		log("Game init. Plat5 engine version "+game.engineInfo.version);
-		log("parsed game",game);
+		log("Game init",game);
 		
 		game.loadLevel("first");
 	}
@@ -25,7 +23,7 @@ var DemoGame = (function() { /* Begin class definition */
 		var g = this.game;
 		
 		this.fpstxt.setText(g.fps);
-		this.aplatform1.setPos(100 +(time %50), 100 +(time %70));
+		this.aplatform1.setPos(200 +(time %50), 100 +(time %70));
 	}
 	
 	DemoGame.prototype.levelInit = function()
