@@ -37,11 +37,11 @@
 	"levels": [
 		{
 			"name": "first",
-			"data": "data/level1.json"
+			"data": "data/demogame/level1.json"
 		},
 		{
 			"name": "last",
-			"data": "data/level2.json"
+			"data": "data/demogame/level2.json"
 		}
 	]
 }

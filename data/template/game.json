@@ -1,0 +1,35 @@
+{
+	"title": "Game Title",
+	
+	"author": "Author name",
+	
+	"version": "1",
+	
+	"width":640,
+	"height":480,
+	"bgcolor":"#000080",
+	
+	"__comment1": "Overlays are appended to the layers of every level",
+	"overlays":[
+		{"name":"scores", "type":"sprite"}
+	],
+	
+	"__comment2": "Resources common to all levels. Put them here.",
+	"resources":[
+	],
+
+	"__comment3": "Sprites common to all levels. Put them here.",
+	"spritedefs":[
+	],
+
+	"__comment4": "Elements that are appended to the screen on every level. Put them here.",
+	"overlayElements":[
+	],
+
+	"levels": [
+		{
+			"name": "Firt level's name",
+			"data": "level.json"
+		}
+	]
+}
