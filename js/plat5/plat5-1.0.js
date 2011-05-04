@@ -74,7 +74,7 @@ P5Game.prototype.loadLevel = function(lvl)
 			
 			/* TODO: This replaces all the children with new layers. Perhaps we want to
 			 * have level transitions one day. Ponder this... */
-			this.scrn.children().remove();
+			this.scrn.empty();
 
 			var lyrs = this.levels[lvl].layers;
 			for (var i = 0; i < lyrs.length; i++)
