@@ -438,6 +438,27 @@ return P5Webkit; })(); /* End class definition */
 
 
 /*
+ * P5Opera
+ * 
+ * This is the parent class for all visual elements which adds in a bunch of platform specific
+ * stuff on Opera browsers.
+ */
+var P5Opera = (function() { /* Begin class definition */
+
+	function P5Opera()
+	{
+	}
+	
+	P5Opera.prototype.element = undefined;
+	
+	P5Opera.prototype.setPos = function(x, y)
+	{
+		this.element.css("-o-transform", "translate("+x+"px,"+y+"px)");
+	}
+
+return P5Opera; })(); /* End class definition */
+
+/*
  * P5Mozilla
  * 
  * This is the parent class for all visual elements which adds in a bunch of platform specific
@@ -485,6 +506,10 @@ var P5PlatformCode = P5IE;
 if (jQuery.browser.webkit)
 {
 	P5PlatformCode = P5Webkit;
+}
+else if (jQuery.browser.opera)
+{
+	P5PlatformCode = P5Opera;
 }
 else if (jQuery.browser.mozilla)
 {
