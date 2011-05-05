@@ -475,8 +475,7 @@ var P5IE = (function() { /* Begin class definition */
 	
 	P5IE.prototype.setPos = function(x, y)
 	{
-		/* Ok, IE is ambitious right now. */
-		//this.element.css("-moz-transform", "translate("+x+"px,"+y+"px)");
+		this.element.css({left:x+"px", top:y+"px"});
 	}
 
 return P5IE; })(); /* End class definition */
