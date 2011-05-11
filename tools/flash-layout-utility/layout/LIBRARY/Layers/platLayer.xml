@@ -1,4 +1,4 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/platLayer" itemID="4dcaf5c5-00000287" linkageExportForAS="true" linkageClassName="platLayer" sourceLibraryItemHRef="Layers/Symbol 1" lastModified="1305148584" lastUniqueIdentifier="4">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/platLayer" itemID="4dcaf5c5-00000287" linkageExportForAS="true" linkageClassName="platLayer" sourceLibraryItemHRef="Layers/Symbol 1" lastModified="1305153898" lastUniqueIdentifier="4">
   <timeline>
     <DOMTimeline name="platLayer">
       <layers>
@@ -38,7 +38,7 @@
                     <Point x="87.5" y="31"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/strawberry" name="" centerPoint3DX="134" centerPoint3DY="77.5">
+                <DOMSymbolInstance libraryItemName="Bitmaps/strawberry" name="powerup1" selected="true" centerPoint3DX="134" centerPoint3DY="77.5">
                   <matrix>
                     <Matrix tx="109" ty="46"/>
                   </matrix>
@@ -46,7 +46,7 @@
                     <Point x="25" y="31.5"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/platform" name="" centerPoint3DX="777.5" centerPoint3DY="208">
+                <DOMSymbolInstance libraryItemName="Bitmaps/platform" name="exitPlatform" centerPoint3DX="777.5" centerPoint3DY="208">
                   <matrix>
                     <Matrix tx="690" ty="177"/>
                   </matrix>
@@ -54,7 +54,7 @@
                     <Point x="87.5" y="31"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/door" name="" centerPoint3DX="780.5" centerPoint3DY="93">
+                <DOMSymbolInstance libraryItemName="Bitmaps/door" name="exit" centerPoint3DX="780.5" centerPoint3DY="93">
                   <matrix>
                     <Matrix tx="735" ty="9"/>
                   </matrix>
@@ -62,7 +62,7 @@
                     <Point x="45.5" y="84"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/ladder" name="" selected="true" centerPoint3DX="654" centerPoint3DY="296">
+                <DOMSymbolInstance libraryItemName="Bitmaps/ladder" name="ladder1" centerPoint3DX="654" centerPoint3DY="296">
                   <matrix>
                     <Matrix tx="617" ty="146"/>
                   </matrix>
