@@ -1,0 +1,72 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/superFGLayer" itemID="4dcaf9ee-00000307" linkageExportForAS="true" linkageClassName="superFGLayer" sourceLibraryItemHRef="Symbol 1" lastModified="1305148440" lastUniqueIdentifier="6">
+  <timeline>
+    <DOMTimeline name="superFGLayer">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Helpers/LayerLimit" name="" centerPoint3DX="460" centerPoint3DY="240">
+                  <matrix>
+                    <Matrix a="1.4375"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="320" y="240"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bush" name="" centerPoint3DX="138" centerPoint3DY="472.5">
+                  <matrix>
+                    <Matrix tx="53" ty="427"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="85" y="45.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bush" name="" centerPoint3DX="347" centerPoint3DY="490.5">
+                  <matrix>
+                    <Matrix tx="262" ty="445"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="85" y="45.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bush" name="" centerPoint3DX="477" centerPoint3DY="495.5">
+                  <matrix>
+                    <Matrix tx="392" ty="450"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="85" y="45.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bush" name="" centerPoint3DX="684" centerPoint3DY="485.5">
+                  <matrix>
+                    <Matrix tx="599" ty="440"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="85" y="45.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bush" name="" selected="true" centerPoint3DX="915" centerPoint3DY="488.5">
+                  <matrix>
+                    <Matrix tx="830" ty="443"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="85" y="45.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bush" name="" centerPoint3DX="-27" centerPoint3DY="485.5">
+                  <matrix>
+                    <Matrix tx="-112" ty="440"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="85" y="45.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

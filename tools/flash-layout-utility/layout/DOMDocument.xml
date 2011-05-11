@@ -1,11 +1,114 @@
 <DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#000099" width="640" height="480" currentTimeline="1" xflVersion="2.0" creatorInfo="Adobe Flash Professional CS5" platform="Windows" versionInfo="Saved by Adobe Flash Windows 11.0 build 489" majorVersion="11" buildNumber="489" viewAngle3D="62.4108334222142" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
+     <folders>
+          <DOMFolderItem name="Bitmaps" itemID="4dcaf163-000001df" isExpanded="true"/>
+          <DOMFolderItem name="Helpers" itemID="4dcaf3d0-00000224"/>
+          <DOMFolderItem name="Layers" itemID="4dcaf3e2-00000228"/>
+     </folders>
+     <media>
+          <DOMBitmapItem name="Bitmaps/bg.png" itemID="4dcaf37f-00000214" sourceExternalFilepath=".\LIBRARY\Bitmaps\bg.png" sourceLastImported="1303908066" originalCompressionType="lossless" quality="50" href="Bitmaps\bg.png" bitmapDataHRef="M 7 1305146185.dat" frameRight="16000" frameBottom="9600"/>
+          <DOMBitmapItem name="Bitmaps/bush.png" itemID="4dcaf674-000002e1" sourceExternalFilepath=".\LIBRARY\Bitmaps\bush.png" sourceLastImported="1305146021" externalFileSize="6561" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\bush.png" bitmapDataHRef="M 8 1305146185.dat" frameRight="3400" frameBottom="1820"/>
+          <DOMBitmapItem name="Bitmaps/door.png" itemID="4dcaf638-000002be" sourceExternalFilepath=".\LIBRARY\Bitmaps\door.png" sourceLastImported="1305145773" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\door.png" bitmapDataHRef="M 9 1305146186.dat" frameRight="1820" frameBottom="3360"/>
+          <DOMBitmapItem name="Bitmaps/foreground.png" itemID="4dcaf568-00000269" sourceExternalFilepath=".\LIBRARY\Bitmaps\foreground.png" sourceLastImported="1305146428" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\foreground.png" bitmapDataHRef="M 10 1305146469.dat" frameRight="12520" frameBottom="2000"/>
+          <DOMBitmapItem name="Bitmaps/ground.png" itemID="4dcaf4d6-00000243" sourceExternalFilepath=".\LIBRARY\Bitmaps\ground.png" sourceLastImported="1305146449" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\ground.png" bitmapDataHRef="M 1 1305146184.dat" frameRight="12520" frameBottom="3020"/>
+          <DOMBitmapItem name="Bitmaps/ladder.png" itemID="4dcaf64b-000002ca" sourceExternalFilepath=".\LIBRARY\Bitmaps\ladder.png" sourceLastImported="1305145798" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\ladder.png" bitmapDataHRef="M 2 1305146184.dat" frameRight="1480" frameBottom="6000"/>
+          <DOMBitmapItem name="Bitmaps/platform.png" itemID="4dcaf5ed-00000294" sourceExternalFilepath=".\LIBRARY\Bitmaps\platform.png" sourceLastImported="1305145824" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\platform.png" bitmapDataHRef="M 3 1305146184.dat" frameRight="3500" frameBottom="1240"/>
+          <DOMBitmapItem name="Bitmaps/strawberry.png" itemID="4dcaf619-000002ac" sourceExternalFilepath=".\LIBRARY\Bitmaps\strawberry.png" sourceLastImported="1305146056" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\strawberry.png" bitmapDataHRef="M 4 1305146185.dat" frameRight="1000" frameBottom="1260"/>
+          <DOMBitmapItem name="Bitmaps/tree1.png" itemID="4dcaf674-000002e2" sourceExternalFilepath=".\LIBRARY\Bitmaps\tree1.png" sourceLastImported="1305146031" externalFileSize="14455" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\tree1.png" bitmapDataHRef="M 5 1305146185.dat" frameRight="3000" frameBottom="5300"/>
+          <DOMBitmapItem name="Bitmaps/tree2.png" itemID="4dcaf674-000002e3" sourceExternalFilepath=".\LIBRARY\Bitmaps\tree2.png" sourceLastImported="1305145813" externalFileSize="14463" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\tree2.png" bitmapDataHRef="M 6 1305146185.dat" frameRight="5680" frameBottom="9000"/>
+     </media>
+     <symbols>
+          <Include href="Bitmaps/bg.xml"/>
+          <Include href="Bitmaps/bush.xml"/>
+          <Include href="Bitmaps/door.xml"/>
+          <Include href="Bitmaps/foreground.xml"/>
+          <Include href="Bitmaps/ground.xml"/>
+          <Include href="Bitmaps/ladder.xml"/>
+          <Include href="Bitmaps/platform.xml"/>
+          <Include href="Bitmaps/strawberry.xml"/>
+          <Include href="Bitmaps/tree1.xml"/>
+          <Include href="Bitmaps/tree2.xml"/>
+          <Include href="Helpers/LayerLimit.xml"/>
+          <Include href="Layers/bgLayer.xml"/>
+          <Include href="Layers/hillsLayer.xml"/>
+          <Include href="Layers/pathLayer.xml"/>
+          <Include href="Layers/platLayer.xml"/>
+          <Include href="Layers/superFGLayer.xml"/>
+     </symbols>
      <timelines>
           <DOMTimeline name="Scene 1">
                <layers>
-                    <DOMLayer name="Layer 1" color="#4FFF4F" current="true" isSelected="true">
+                    <DOMLayer name="code" color="#9933CC" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
+                                   <Actionscript>
+                                        <script><![CDATA[trace("here is some JSON");]]></script>
+                                   </Actionscript>
                                    <elements/>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="superFGLayer" color="#808080" current="true" isSelected="true" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Layers/superFGLayer" name="" selected="true" centerPoint3DX="443.85" centerPoint3DY="270.4">
+                                             <transformationPoint>
+                                                  <Point x="443.85" y="270.15"/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="platLayer" color="#4FFFFF" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Layers/platLayer" name="" centerPoint3DX="445" centerPoint3DY="240">
+                                             <transformationPoint>
+                                                  <Point x="445" y="240"/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="pathLayer" color="#FF4FFF" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Layers/pathLayer" name="" centerPoint3DX="407.35" centerPoint3DY="240">
+                                             <transformationPoint>
+                                                  <Point x="407.35" y="240"/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="hillsLayer" color="#FF800A" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Layers/hillsLayer" name="" centerPoint3DX="626" centerPoint3DY="240.5">
+                                             <transformationPoint>
+                                                  <Point x="625.65" y="240.25"/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="bgLayer" color="#4FFF4F" autoNamed="false">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMSymbolInstance libraryItemName="Layers/bgLayer" name="" centerPoint3DX="400" centerPoint3DY="240">
+                                             <transformationPoint>
+                                                  <Point x="400" y="240"/>
+                                             </transformationPoint>
+                                        </DOMSymbolInstance>
+                                   </elements>
                               </DOMFrame>
                          </frames>
                     </DOMLayer>

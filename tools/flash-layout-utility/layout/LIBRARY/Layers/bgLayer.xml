@@ -1,0 +1,29 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/bgLayer" itemID="4dcaf0f0-000001d8" linkageExportForAS="true" linkageClassName="bgLayer" sourceLibraryItemHRef="Symbol 1" lastModified="1305146250" lastUniqueIdentifier="1">
+  <timeline>
+    <DOMTimeline name="bgLayer">
+      <layers>
+        <DOMLayer name="Limit" color="#4FFF4F" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Helpers/LayerLimit" name="" selected="true" centerPoint3DX="192.5" centerPoint3DY="112.45">
+                  <matrix>
+                    <Matrix a="1.25"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="154" y="112.45"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/bg" name="" centerPoint3DX="400" centerPoint3DY="240">
+                  <transformationPoint>
+                    <Point x="400" y="240"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

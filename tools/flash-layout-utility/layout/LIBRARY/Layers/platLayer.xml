@@ -1,0 +1,80 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/platLayer" itemID="4dcaf5c5-00000287" linkageExportForAS="true" linkageClassName="platLayer" sourceLibraryItemHRef="Layers/Symbol 1" lastModified="1305148584" lastUniqueIdentifier="4">
+  <timeline>
+    <DOMTimeline name="platLayer">
+      <layers>
+        <DOMLayer name="Layer 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Helpers/LayerLimit" name="" centerPoint3DX="445" centerPoint3DY="240">
+                  <matrix>
+                    <Matrix a="1.390625"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="320" y="240"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/platform" name="" centerPoint3DX="178.5" centerPoint3DY="324">
+                  <matrix>
+                    <Matrix tx="91" ty="293"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="87.5" y="31"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/platform" name="" centerPoint3DX="378.5" centerPoint3DY="222">
+                  <matrix>
+                    <Matrix tx="291" ty="191"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="87.5" y="31"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/platform" name="" centerPoint3DX="126.5" centerPoint3DY="140">
+                  <matrix>
+                    <Matrix tx="39" ty="109"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="87.5" y="31"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/strawberry" name="" centerPoint3DX="134" centerPoint3DY="77.5">
+                  <matrix>
+                    <Matrix tx="109" ty="46"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="25" y="31.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/platform" name="" centerPoint3DX="777.5" centerPoint3DY="208">
+                  <matrix>
+                    <Matrix tx="690" ty="177"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="87.5" y="31"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/door" name="" centerPoint3DX="780.5" centerPoint3DY="93">
+                  <matrix>
+                    <Matrix tx="735" ty="9"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="45.5" y="84"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="Bitmaps/ladder" name="" selected="true" centerPoint3DX="654" centerPoint3DY="296">
+                  <matrix>
+                    <Matrix tx="617" ty="146"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="37" y="150"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>
