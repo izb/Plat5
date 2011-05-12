@@ -1,0 +1,47 @@
+{
+	"title": "Demo game",
+	
+	"author": "Ian Beveridge",
+	
+	"version": "1",
+	
+	"width":640,
+	"height":480,
+	"bgcolor":"#000080",
+	
+	"__comment1": "Overlays are appended to the layers of every level",
+	"overlays":[
+		{"name":"scores", "type":"sprite"}
+	],
+	
+	"__comment2": "Resources common to all levels",
+	"resources":[
+		{"name":"girl", "strip": "examples/demogame/img/girlwalk.png", "rows":1, "columns":8}
+	],
+
+	"__comment3": "Sprites common to all levels",
+	"spritedefs":[
+		{"name":"girl", "type":"strip", "res":"girl", "ranges":[
+			{"name":"stop", "type":"static", "frame":3},
+			{"name":"walkslow", "type":"cycle", "from":0, "to":7, "fps":5},
+			{"name":"saunter", "type":"cycle", "from":0, "to":7, "fps":15},
+			{"name":"walkfast", "type":"cycle", "from":0, "to":7, "fps":60}
+		]}
+	],
+
+	"overlayElements":[
+		{"type":"txt", "name":"fpslabel", "cssClass":"scorestyle", "x":30, "y":30, "layer":"scores", "value":"FPS:"},
+		{"type":"txt", "name":"fpstxt", "cssClass":"scorestyle", "x":80, "y":30, "layer":"scores", "value":"0"}
+	],
+
+	"levels": [
+		{
+			"name": "first",
+			"data": "examples/demogame/data/level1.json"
+		},
+		{
+			"name": "last",
+			"data": "examples/demogame/data/level2.json"
+		}
+	]
+}

@@ -12,9 +12,9 @@
 	
 	"__comment2": "Resources are used in screen definitions, and are pre-loaded",
 	"resources":[
-		{"name":"candh", "img": "img/candh.png"},
-		{"name":"icecream", "img": "img/icecream.png"},
-		{"name":"bg", "img": "img/bg.png"}
+		{"name":"candh", "img": "examples/demogame/img/candh.png"},
+		{"name":"icecream", "img": "examples/demogame/img/icecream.png"},
+		{"name":"bg", "img": "examples/demogame/img/bg.png"}
 	],
 	
 	"spritedefs":[

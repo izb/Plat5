@@ -37,14 +37,7 @@
      <timelines>
           <DOMTimeline name="Scene 1">
                <layers>
-                    <DOMLayer name="code" color="#9933CC" autoNamed="false">
-                         <frames>
-                              <DOMFrame index="0" keyMode="9728">
-                                   <elements/>
-                              </DOMFrame>
-                         </frames>
-                    </DOMLayer>
-                    <DOMLayer name="superFGLayer" color="#808080" autoNamed="false">
+                    <DOMLayer name="superFGLayer" color="#808080" current="true" isSelected="true" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
@@ -83,11 +76,11 @@
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="hillsLayer" color="#FF800A" current="true" isSelected="true" autoNamed="false">
+                    <DOMLayer name="hillsLayer" color="#FF800A" autoNamed="false">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Layers/hillsLayer" name="" selected="true" centerPoint3DX="626" centerPoint3DY="240.5">
+                                        <DOMSymbolInstance libraryItemName="Layers/hillsLayer" name="" centerPoint3DX="626" centerPoint3DY="240.5">
                                              <transformationPoint>
                                                   <Point x="625.65" y="240.25"/>
                                              </transformationPoint>
@@ -415,6 +408,7 @@
      </extendedSwatchLists>
      <PrinterSettings/>
      <publishHistory>
+          <PublishItem publishSize="68303" publishTime="1305237229"/>
           <PublishItem publishSize="68215" publishTime="1305153836"/>
           <PublishItem publishSize="68196" publishTime="1305153756"/>
           <PublishItem publishSize="68179" publishTime="1305153710"/>
@@ -434,6 +428,5 @@
           <PublishItem publishSize="66109" publishTime="1305152304"/>
           <PublishItem publishSize="67633" publishTime="1305152259"/>
           <PublishItem publishSize="67582" publishTime="1305152176"/>
-          <PublishItem publishSize="67371" publishTime="1305151858"/>
      </publishHistory>
 </DOMDocument>

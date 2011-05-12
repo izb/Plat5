@@ -24,7 +24,7 @@
 				
 				var lims :MovieClip = getLayerLimitClip(child);
 				
-				layers.push({name:getQualifiedClassName(child), type:"sprite", parallaxWidth:Math.floor(lims.width) + "px"});
+				layers.push({name:getQualifiedClassName(child), type:"sprite", parallaxWidth:Math.floor(lims.width)});
 			}
 			
 			dump(layers, "layers");
@@ -73,6 +73,10 @@
 				{
 					var s :MovieClip = layer.getChildAt(j) as MovieClip;
 					var resName :String = getQualifiedClassName(s);
+					if(resName == "LayerLimit")
+					{
+						continue;
+					}
 					trace("            {\"type\":\"img\", \"name\":\""+s.name+"\", \"res\":\""+resName+"\", \"layer\":\""
 						  +layerName+"\", \"x\":"+Math.floor(s.x)+", \"y\":"+Math.floor(s.y)+"},");
 				}
@@ -91,7 +95,14 @@
 				var ldata:String = "    {";
 				for (var p:String in e)
 				{
-					ldata = ldata + "\""+p+"\": \""+e[p]+"\", ";
+					if(e[p] is String)
+					{
+						ldata = ldata + "\""+p+"\": \""+e[p]+"\", ";
+					}
+					else
+					{
+						ldata = ldata + "\""+p+"\": "+e[p]+", ";
+					}
 				}
 				ldata = ldata + "},";
 				

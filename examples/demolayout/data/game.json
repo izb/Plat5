@@ -1,5 +1,5 @@
 {
-	"title": "Demo game",
+	"title": "Demo layout",
 	
 	"author": "Ian Beveridge",
 	
@@ -16,17 +16,10 @@
 	
 	"__comment2": "Resources common to all levels",
 	"resources":[
-		{"name":"girl", "strip": "img/girlwalk.png", "rows":1, "columns":8}
 	],
 
 	"__comment3": "Sprites common to all levels",
 	"spritedefs":[
-		{"name":"girl", "type":"strip", "res":"girl", "ranges":[
-			{"name":"stop", "type":"static", "frame":3},
-			{"name":"walkslow", "type":"cycle", "from":0, "to":7, "fps":5},
-			{"name":"saunter", "type":"cycle", "from":0, "to":7, "fps":15},
-			{"name":"walkfast", "type":"cycle", "from":0, "to":7, "fps":60}
-		]}
 	],
 
 	"overlayElements":[
@@ -37,11 +30,7 @@
 	"levels": [
 		{
 			"name": "first",
-			"data": "data/demogame/level1.json"
-		},
-		{
-			"name": "last",
-			"data": "data/demogame/level2.json"
+			"data": "examples/demolayout/data/level1.json"
 		}
 	]
 }

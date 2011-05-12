@@ -5,7 +5,8 @@
  up by the boilderplate build anyway?
 */
 
-var demogame = (function()
+var thegame = (function()
 {
-	return new P5Game("data/demogame/game.json", jQuery("#main"), new DemoGame()).run();
+	//return new P5Game("examples/demogame/data/game.json", jQuery("#main"), new DemoGame()).run();
+	return new P5Game("examples/demolayout/data/game.json", jQuery("#main"), new DemoLayout()).run();
 })();
