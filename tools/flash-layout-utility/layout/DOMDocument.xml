@@ -1,11 +1,11 @@
 <DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#000099" width="640" height="480" currentTimeline="1" xflVersion="2.0" creatorInfo="Adobe Flash Professional CS5" platform="Windows" versionInfo="Saved by Adobe Flash Windows 11.0 build 489" majorVersion="11" buildNumber="489" viewAngle3D="62.4108334222142" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
      <folders>
-          <DOMFolderItem name="Bitmaps" itemID="4dcaf163-000001df"/>
+          <DOMFolderItem name="Bitmaps" itemID="4dcaf163-000001df" isExpanded="true"/>
           <DOMFolderItem name="Helpers" itemID="4dcaf3d0-00000224" isExpanded="true"/>
           <DOMFolderItem name="Layers" itemID="4dcaf3e2-00000228" isExpanded="true"/>
      </folders>
      <media>
-          <DOMBitmapItem name="Bitmaps/bg.png" itemID="4dcaf37f-00000214" sourceExternalFilepath=".\LIBRARY\Bitmaps\bg.png" sourceLastImported="1305150925" externalFileSize="227034" originalCompressionType="lossless" quality="50" href="Bitmaps\bg.png" bitmapDataHRef="M 7 1305146185.dat" frameRight="16000" frameBottom="9600"/>
+          <DOMBitmapItem name="Bitmaps/bg.png" itemID="4dcaf37f-00000214" sourceExternalFilepath=".\LIBRARY\Bitmaps\bg.png" sourceLastImported="1305661297" externalFileSize="239700" originalCompressionType="lossless" quality="50" href="Bitmaps\bg.png" bitmapDataHRef="M 7 1305146185.dat" frameRight="16000" frameBottom="10000"/>
           <DOMBitmapItem name="Bitmaps/bush.png" itemID="4dcaf674-000002e1" sourceExternalFilepath=".\LIBRARY\Bitmaps\bush.png" sourceLastImported="1305150925" externalFileSize="6561" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\bush.png" bitmapDataHRef="M 8 1305146185.dat" frameRight="3400" frameBottom="1820"/>
           <DOMBitmapItem name="Bitmaps/door.png" itemID="4dcaf638-000002be" sourceExternalFilepath=".\LIBRARY\Bitmaps\door.png" sourceLastImported="1305150925" externalFileSize="3869" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\door.png" bitmapDataHRef="M 9 1305146186.dat" frameRight="1820" frameBottom="3360"/>
           <DOMBitmapItem name="Bitmaps/foreground.png" itemID="4dcaf568-00000269" sourceExternalFilepath=".\LIBRARY\Bitmaps\foreground.png" sourceLastImported="1305150925" externalFileSize="5104" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Bitmaps\foreground.png" bitmapDataHRef="M 10 1305146469.dat" frameRight="12520" frameBottom="2000"/>
@@ -41,7 +41,10 @@
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Layers/superFGLayer" name="" centerPoint3DX="443.85" centerPoint3DY="270.4">
+                                        <DOMSymbolInstance libraryItemName="Layers/superFGLayer" name="" selected="true" centerPoint3DX="443.85" centerPoint3DY="170.4">
+                                             <matrix>
+                                                  <Matrix ty="-100"/>
+                                             </matrix>
                                              <transformationPoint>
                                                   <Point x="443.85" y="270.15"/>
                                              </transformationPoint>
@@ -54,7 +57,10 @@
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Layers/platLayer" name="" centerPoint3DX="445" centerPoint3DY="240">
+                                        <DOMSymbolInstance libraryItemName="Layers/platLayer" name="" selected="true" centerPoint3DX="445" centerPoint3DY="160">
+                                             <matrix>
+                                                  <Matrix ty="-80"/>
+                                             </matrix>
                                              <transformationPoint>
                                                   <Point x="445" y="240"/>
                                              </transformationPoint>
@@ -67,7 +73,10 @@
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Layers/pathLayer" name="" centerPoint3DX="407.35" centerPoint3DY="240">
+                                        <DOMSymbolInstance libraryItemName="Layers/pathLayer" name="" selected="true" centerPoint3DX="407.35" centerPoint3DY="180">
+                                             <matrix>
+                                                  <Matrix ty="-60"/>
+                                             </matrix>
                                              <transformationPoint>
                                                   <Point x="407.35" y="240"/>
                                              </transformationPoint>
@@ -80,7 +89,10 @@
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Layers/hillsLayer" name="" centerPoint3DX="626" centerPoint3DY="240.5">
+                                        <DOMSymbolInstance libraryItemName="Layers/hillsLayer" name="" selected="true" centerPoint3DX="626" centerPoint3DY="200.5">
+                                             <matrix>
+                                                  <Matrix ty="-40"/>
+                                             </matrix>
                                              <transformationPoint>
                                                   <Point x="625.65" y="240.25"/>
                                              </transformationPoint>
@@ -93,10 +105,16 @@
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="Layers/bgLayer" name="" centerPoint3DX="400" centerPoint3DY="240">
+                                        <DOMSymbolInstance libraryItemName="Layers/bgLayer" name="" selected="true" centerPoint3DX="400" centerPoint3DY="220">
+                                             <matrix>
+                                                  <Matrix ty="-20"/>
+                                             </matrix>
                                              <transformationPoint>
                                                   <Point x="400" y="240"/>
                                              </transformationPoint>
+                                             <color>
+                                                  <Color alphaMultiplier="0.80078125"/>
+                                             </color>
                                         </DOMSymbolInstance>
                                    </elements>
                               </DOMFrame>
@@ -408,6 +426,10 @@
      </extendedSwatchLists>
      <PrinterSettings/>
      <publishHistory>
+          <PublishItem publishSize="68997" publishTime="1305669576"/>
+          <PublishItem publishSize="68987" publishTime="1305668846"/>
+          <PublishItem publishSize="68985" publishTime="1305668708"/>
+          <PublishItem publishSize="68971" publishTime="1305668636"/>
           <PublishItem publishSize="68303" publishTime="1305237229"/>
           <PublishItem publishSize="68215" publishTime="1305153836"/>
           <PublishItem publishSize="68196" publishTime="1305153756"/>
@@ -424,9 +446,5 @@
           <PublishItem publishSize="66109" publishTime="1305152378"/>
           <PublishItem publishSize="66109" publishTime="1305152366"/>
           <PublishItem publishSize="66109" publishTime="1305152357"/>
-          <PublishItem publishSize="66109" publishTime="1305152315"/>
-          <PublishItem publishSize="66109" publishTime="1305152304"/>
-          <PublishItem publishSize="67633" publishTime="1305152259"/>
-          <PublishItem publishSize="67582" publishTime="1305152176"/>
      </publishHistory>
 </DOMDocument>

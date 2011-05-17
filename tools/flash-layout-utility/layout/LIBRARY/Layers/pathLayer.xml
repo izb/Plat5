@@ -1,4 +1,4 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/pathLayer" itemID="4dcaf535-0000025b" linkageExportForAS="true" linkageClassName="pathLayer" sourceLibraryItemHRef="Symbol 1" lastModified="1305148652" lastUniqueIdentifier="3">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Layers/pathLayer" itemID="4dcaf535-0000025b" linkageExportForAS="true" linkageClassName="pathLayer" sourceLibraryItemHRef="Symbol 1" lastModified="1305670011" lastUniqueIdentifier="3">
   <timeline>
     <DOMTimeline name="pathLayer">
       <layers>
@@ -6,33 +6,33 @@
           <frames>
             <DOMFrame index="0" keyMode="9728">
               <elements>
-                <DOMSymbolInstance libraryItemName="Helpers/LayerLimit" name="" centerPoint3DX="430" centerPoint3DY="240">
+                <DOMSymbolInstance libraryItemName="Helpers/LayerLimit" name="" centerPoint3DX="430" centerPoint3DY="270">
                   <matrix>
-                    <Matrix a="1.34375"/>
+                    <Matrix a="1.34375" d="1.125"/>
                   </matrix>
                   <transformationPoint>
                     <Point x="320" y="240"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/foreground" name="" centerPoint3DX="94" centerPoint3DY="430">
+                <DOMSymbolInstance libraryItemName="Bitmaps/foreground" name="" selected="true" centerPoint3DX="94" centerPoint3DY="490">
                   <matrix>
-                    <Matrix tx="-219" ty="380"/>
+                    <Matrix tx="-219" ty="440"/>
                   </matrix>
                   <transformationPoint>
                     <Point x="313" y="50"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/foreground" name="" centerPoint3DX="720" centerPoint3DY="430">
+                <DOMSymbolInstance libraryItemName="Bitmaps/foreground" name="" selected="true" centerPoint3DX="720" centerPoint3DY="490">
                   <matrix>
-                    <Matrix tx="407" ty="380"/>
+                    <Matrix tx="407" ty="440"/>
                   </matrix>
                   <transformationPoint>
                     <Point x="313" y="50"/>
                   </transformationPoint>
                 </DOMSymbolInstance>
-                <DOMSymbolInstance libraryItemName="Bitmaps/tree1" name="" selected="true" centerPoint3DX="559" centerPoint3DY="293.5">
+                <DOMSymbolInstance libraryItemName="Bitmaps/tree1" name="" selected="true" centerPoint3DX="559" centerPoint3DY="353.5">
                   <matrix>
-                    <Matrix tx="484" ty="161"/>
+                    <Matrix tx="484" ty="221"/>
                   </matrix>
                   <transformationPoint>
                     <Point x="75" y="132.5"/>

@@ -3,11 +3,11 @@
 
 	"__comment1": "Layers are used in screen definitions",
 	"layers":[
-	    {"parallaxWidth": 801, "type": "sprite", "name": "bgLayer" },
-    	{"parallaxWidth": 831, "type": "sprite", "name": "hillsLayer" },
-    	{"parallaxWidth": 861, "type": "sprite", "name": "pathLayer" },
-    	{"parallaxWidth": 891, "type": "sprite", "name": "platLayer" },
-    	{"parallaxWidth": 921, "type": "sprite", "name": "superFGLayer" }
+	    {"parallaxWidth": 801, "name": "bgLayer", "parallaxHeight": 501, "type": "sprite" },
+	    {"parallaxWidth": 831, "name": "hillsLayer", "parallaxHeight": 521, "type": "sprite" },
+	    {"parallaxWidth": 861, "name": "pathLayer", "parallaxHeight": 541, "type": "sprite" },
+	    {"parallaxWidth": 891, "name": "platLayer", "parallaxHeight": 561, "type": "sprite" },
+	    {"parallaxWidth": 921, "name": "superFGLayer", "parallaxHeight": 581, "type": "sprite" }
 	],
 	
 	"__comment2": "Resources are used in screen definitions, and are pre-loaded",
@@ -31,26 +31,26 @@
 		{
 			"name":"screen1",
 			"elements":[
-	            {"type":"img", "name":"theBG", "res":"bg", "layer":"bgLayer", "x":0, "y":0},
+	            {"type":"img", "name":"theBG", "res":"bg", "layer":"bgLayer", "x":0, "y":-20},
 	            {"type":"img", "name":"instance8", "res":"ground", "layer":"hillsLayer", "x":0, "y":330},
 	            {"type":"img", "name":"instance10", "res":"ground", "layer":"hillsLayer", "x":626, "y":330},
 	            {"type":"img", "name":"instance12", "res":"tree2", "layer":"hillsLayer", "x":118, "y":0},
 	            {"type":"img", "name":"instance17", "res":"foreground", "layer":"pathLayer", "x":-219, "y":380},
 	            {"type":"img", "name":"instance19", "res":"foreground", "layer":"pathLayer", "x":407, "y":380},
 	            {"type":"img", "name":"instance21", "res":"tree1", "layer":"pathLayer", "x":484, "y":161},
-	            {"type":"img", "name":"instance26", "res":"platform", "layer":"platLayer", "x":91, "y":293},
-	            {"type":"img", "name":"instance28", "res":"platform", "layer":"platLayer", "x":291, "y":191},
-	            {"type":"img", "name":"instance30", "res":"platform", "layer":"platLayer", "x":39, "y":109},
-	            {"type":"img", "name":"powerup1", "res":"strawberry", "layer":"platLayer", "x":109, "y":46},
-	            {"type":"img", "name":"exitPlatform", "res":"platform", "layer":"platLayer", "x":690, "y":177},
-	            {"type":"img", "name":"exit", "res":"door", "layer":"platLayer", "x":735, "y":9},
-	            {"type":"img", "name":"ladder1", "res":"ladder", "layer":"platLayer", "x":617, "y":146},
+	            {"type":"img", "name":"instance26", "res":"platform", "layer":"platLayer", "x":91, "y":265},
+	            {"type":"img", "name":"instance28", "res":"platform", "layer":"platLayer", "x":291, "y":144},
+	            {"type":"img", "name":"instance30", "res":"platform", "layer":"platLayer", "x":39, "y":47},
+	            {"type":"img", "name":"powerup1", "res":"strawberry", "layer":"platLayer", "x":109, "y":-28},
+	            {"type":"img", "name":"exitPlatform", "res":"platform", "layer":"platLayer", "x":690, "y":127},
+	            {"type":"img", "name":"exit", "res":"door", "layer":"platLayer", "x":735, "y":-71},
+	            {"type":"img", "name":"ladder1", "res":"ladder", "layer":"platLayer", "x":617, "y":91},
 	            {"type":"img", "name":"instance39", "res":"bush", "layer":"superFGLayer", "x":53, "y":427},
 	            {"type":"img", "name":"instance41", "res":"bush", "layer":"superFGLayer", "x":262, "y":445},
 	            {"type":"img", "name":"instance43", "res":"bush", "layer":"superFGLayer", "x":392, "y":450},
 	            {"type":"img", "name":"instance45", "res":"bush", "layer":"superFGLayer", "x":599, "y":440},
 	            {"type":"img", "name":"instance47", "res":"bush", "layer":"superFGLayer", "x":830, "y":443},
-            	{"type":"img", "name":"instance49", "res":"bush", "layer":"superFGLayer", "x":-112, "y":440}
+	            {"type":"img", "name":"instance49", "res":"bush", "layer":"superFGLayer", "x":-112, "y":440}
 			]
 		}
 	],

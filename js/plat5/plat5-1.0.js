@@ -346,7 +346,7 @@ var P5Game = (function() { /* Begin class definition */
 		return o;
 	}
 	
-	P5Game.prototype.setParallaxPos = function(pc)
+	P5Game.prototype.setParallaxPos = function(pcx, pcy)
 	{
 		/* Queue this on the next animation update */
 		requestAnimationFrame(context(this).callback(function() {
@@ -358,7 +358,7 @@ var P5Game = (function() { /* Begin class definition */
 				{
 					/* TODO: Optimise. Maintain a list of parallax layers to avoid this test. */
 					/* TODO: Verify on load: Parallax width must be > game width */
-					var pos = -Math.floor(pc * (lyr.parallaxWidth - this.width));
+					var pos = -Math.floor(pcx * (lyr.parallaxWidth - this.width));
 	
 					/* TODO: Optimization. Multiple queued methods with requestAnimationFrame mean that
 					 * each callback is likely to trigger a layout before the page is repainted. This can
@@ -367,6 +367,12 @@ var P5Game = (function() { /* Begin class definition */
 					 * are known, then we'd only trigger a layout once. Not entirely sure how to do all that
 					 * though. Meh. */
 					lyr.element.css("left", pos+"px");
+				}
+				if (lyr.hasOwnProperty("parallaxHeight"))
+				{
+					var pos = Math.floor(pcy * (lyr.parallaxHeight - this.height));
+	
+					lyr.element.css("top", pos+"px");
 				}
 			}
 		}), this.scrn);
