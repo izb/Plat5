@@ -22,7 +22,7 @@ var DemoLayout = (function() { /* Begin class definition */
 	{
 		var g = this.game;
 		
-		var xp = (Math.sin(time/400) + 1)/2;
+		var xp = (Math.sin(time/600) + 1)/2;
 		var yp = (Math.cos(time/400) + 1)/2;
 		
 		g.setParallaxPos(xp, yp);
